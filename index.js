@@ -17,11 +17,12 @@ bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const message = msg.text;
 
-  bot.sendChatAction(chatId, "typing"); // indicate that bot is typing
+
   bot.sendMessage(
     process.env.adminId,
     `رسالة من \n${msg.from.first_name} \n username is ${msg.from.username}\n message is ${msg.text}`
   );
+  bot.sendChatAction(msg.from.id, "typing")
   const completion = openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [{ role: "user", content: message }],
