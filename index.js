@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const telegramToken = process.env.telegram_token;
 const bot = new TelegramBot(telegramToken, { polling: true });
