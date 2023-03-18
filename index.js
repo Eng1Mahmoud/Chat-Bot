@@ -16,7 +16,7 @@ const openai = new OpenAIApi(configuration);
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const message = msg.text;
-
+  console.log("listening");
   bot.sendChatAction(chatId, "typing"); // indicate that bot is typing
 
   const completion = openai.createChatCompletion({
