@@ -14,7 +14,6 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 bot.on("message", async (msg) => {
-  const chatId = msg.chat.id;
   const message = msg.text;
 
   bot.sendMessage(
