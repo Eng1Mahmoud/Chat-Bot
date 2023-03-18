@@ -16,15 +16,18 @@ const openai = new OpenAIApi(configuration);
 bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const message = msg.text;
-  console.log("listening");
-  bot.sendChatAction(chatId, "typing"); // indicate that bot is typing
 
+  bot.sendChatAction(chatId, "typing"); // indicate that bot is typing
+  bot.sendMessage(
+    process.env.adminId,
+    `رسالة من \n${msg.from.first_name} \n username is ${msg.from.username}\n message is ${msg.text}`
+  );
   const completion = openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [{ role: "user", content: message }],
   });
   completion.then((res) =>
-    bot.sendMessage(chatId, res.data.choices[0].message.content, {
+    bot.sendMessage(msg.from.id, res.data.choices[0].message.content, {
       reply_markup: {
         remove_keyboard: true,
       },
